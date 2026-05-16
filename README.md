@@ -2,6 +2,7 @@
   <a href="https://MohammedRafeeq.pythonanywhere.com">
     <img src="https://img.shields.io/badge/Live_Demo-PythonAnywhere-5C4EE5?style=for-the-badge&logo=python&logoColor=white"/>
   </a>
+  <blockquote>The live demo runs on PythonAnywhere (free tier) with SQLite and no Celery/Redis. Docker deployment provides the full stack with PostgreSQL + Redis + Celery.</blockquote>
   <br/>
   <img src="https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
   <img src="https://img.shields.io/badge/Flask-3.1-000000?style=for-the-badge&logo=flask&logoColor=white"/>
