@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Organization Settings{% endblock %}
+{% block content %}
+<h2>Organization Settings</h2>
+<div class="card mt-3">
+    <div class="card-body">
+        <p><strong>Name:</strong> {{ org.name }}</p>
+        <p><strong>Slug:</strong> {{ org.slug }}</p>
+    </div>
+</div>
+{% endblock %}

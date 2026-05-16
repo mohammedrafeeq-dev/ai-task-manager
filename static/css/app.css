@@ -1,0 +1,6 @@
+.chat-msg { padding: 8px 12px; border-radius: 8px; }
+.user-msg { background: #e3f2fd; }
+.ai-msg { background: #f5f5f5; }
+
+.status-badge { min-width: 80px; display: inline-block; }
+.priority-badge { min-width: 60px; display: inline-block; }

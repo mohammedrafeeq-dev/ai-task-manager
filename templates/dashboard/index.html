@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+{% endblock %}
+{% block content %}
+<h2>Dashboard</h2>
+{% if stats %}
+<div class="row mt-3">
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-primary"><div class="card-body"><h5 class="card-title">Total Tasks</h5><p class="card-text display-6">{{ stats.total }}</p></div></div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-warning"><div class="card-body"><h5 class="card-title">In Progress</h5><p class="card-text display-6">{{ stats.in_progress }}</p></div></div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-success"><div class="card-body"><h5 class="card-title">Done</h5><p class="card-text display-6">{{ stats.done }}</p></div></div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-danger"><div class="card-body"><h5 class="card-title">Urgent</h5><p class="card-text display-6">{{ stats.urgent }}</p></div></div>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title text-muted">Status Distribution</h6>
+                <canvas id="statusChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title text-muted">Priority Overview</h6>
+                <canvas id="priorityChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+{% block scripts %}
+<script>
+new Chart(document.getElementById('statusChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['To Do', 'In Progress', 'Done'],
+        datasets: [{
+            data: [{{ stats.todo }}, {{ stats.in_progress }}, {{ stats.done }}],
+            backgroundColor: ['#6c757d', '#ffc107', '#198754']
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+new Chart(document.getElementById('priorityChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Low', 'Medium', 'High', 'Urgent'],
+        datasets: [{
+            data: [{{ stats.low }}, {{ stats.medium }}, {{ stats.high }}, {{ stats.urgent }}],
+            backgroundColor: ['#0dcaf0', '#ffc107', '#fd7e14', '#dc3545']
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+</script>
+{% endblock %}
+{% else %}
+<div class="alert alert-info mt-3">No organization set up yet. <a href="{{ url_for('organizations.create') }}">Create one</a>.</div>
+{% endif %}
+{% endblock %}

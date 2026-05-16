@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Create Organization{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <h2 class="mb-4">Create Your Organization</h2>
+        <form method="POST" class="card card-body">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.name.label(class="form-label") }}
+                {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else "")) }}
+                {% for e in form.name.errors %}<div class="invalid-feedback">{{ e }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+                {{ form.slug.label(class="form-label") }}
+                <div class="input-group">
+                    <span class="input-group-text">/org/</span>
+                    {{ form.slug(class="form-control" + (" is-invalid" if form.slug.errors else "")) }}
+                    {% for e in form.slug.errors %}<div class="invalid-feedback">{{ e }}</div>{% endfor %}
+                </div>
+            </div>
+            {{ form.submit(class="btn btn-primary w-100") }}
+        </form>
+    </div>
+</div>
+{% endblock %}

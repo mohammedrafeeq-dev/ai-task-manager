@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ task.title }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>{{ task.title }}</h2>
+    <div>
+        <a href="{{ url_for('tasks.edit_task', task_id=task.id) }}" class="btn btn-outline-primary">Edit</a>
+        <form method="POST" action="{{ url_for('tasks.delete_task', task_id=task.id) }}" class="d-inline" onsubmit="return confirm('Delete this task?')">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-outline-danger">Delete</button>
+        </form>
+    </div>
+</div>
+<div class="card mb-3">
+    <div class="card-body">
+        <p>{{ task.description or 'No description' }}</p>
+        <p><strong>Status:</strong> {{ task.status }} | <strong>Priority:</strong> {{ task.priority }} | <strong>Due:</strong> {{ task.due_date.strftime('%Y-%m-%d') if task.due_date else 'None' }}</p>
+    </div>
+</div>
+{% endblock %}
